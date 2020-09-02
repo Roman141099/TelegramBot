@@ -1,0 +1,10 @@
+{
+  "1082560005": {
+    "User ID": 1082560005,
+    "Session settings": {
+      "isChoosedCity": false,
+      "sessionOpened": false,
+      "Session type endpoint": "Main.UBot.com.WeatherSession"
+    }
+  }
+}
