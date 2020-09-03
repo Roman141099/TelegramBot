@@ -1,5 +1,6 @@
 package Main.UBot.com;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class WeatherSession extends Session {
@@ -17,14 +18,7 @@ public class WeatherSession extends Session {
         this.isChoosedCity = isChoosedCity;
     }
 
-    public boolean isChoosedCity() {
-        return isChoosedCity;
-    }
-
-    public void setChoosedCity(boolean choosedCity) {
-        isChoosedCity = choosedCity;
-    }
-
+    @Override
     public String nextStep(String inputTxt) {
         if (!isChoosedCity){
             isChoosedCity = true;
@@ -34,16 +28,24 @@ public class WeatherSession extends Session {
         if(resultForecast.equals("No city")){
             return wrongNameCityMessage[new Random().nextInt(wrongNameCityMessage.length)];
         }
-        setSessionOpened(false);
-        setChoosedCity(false);
+//        setSessionOpened(false);
+//        setChoosedCity(false);
+        terminateAllProcesses();
         return resultForecast;
+    }
+
+    @Override
+    public void terminateAllProcesses() {
+//        sessionOpened = false;
+//        isChoosedCity = false;
+        sessionOpened = isChoosedCity = false;
     }
 
     @Override
     public String toString() {
         return "WeatherSession{" +
-                "isChoosedCity=" + isChoosedCity +
-                ", sessionOpened=" + sessionOpened +
-                '}';
+                "isChoosedCity=<" + isChoosedCity +
+                ">, sessionOpened=<" + sessionOpened +
+                ">}";
     }
 }

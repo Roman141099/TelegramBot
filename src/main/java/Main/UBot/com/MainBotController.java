@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -21,55 +22,69 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class BotBotBot extends TelegramLongPollingBot {
-    {
+public class MainBotController extends TelegramLongPollingBot {
+    private static final String URL_TO_DB = "src/main/resources/Data bases/sessionStates.json";
+    private static final Gson jsonSessionDeserializer = new GsonBuilder().setPrettyPrinting().
+            registerTypeAdapter(Session.class, new SessionDeserializer()).create();
+    private static final Map<Long, User> sessionState;
+    static {
         sessionState = uploadInfo(Paths.get(URL_TO_DB));
     }
-
-    private static final String URL_TO_DB = "src/main/resources/Data bases/sessionStates.json";
-    private static Map<Long, User> sessionState = new HashMap<>();
-    private final static Gson jsonSessionDeserializer = new GsonBuilder().setPrettyPrinting().
-            registerTypeAdapter(Session.class, new SessionDeserializer()).create();
 
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
         System.out.println("Активность от " + sessionState.get(message.getChatId()));
         User user = new User(message.getChatId());
-        if(!sessionState.containsKey(user.getUserChatId())){
+        if (!sessionState.containsKey(user.getUserChatId())) {
+            Chat userChat = message.getChat();
+            user.setFirstName(userChat.getFirstName() != null ? userChat.getFirstName() : "Unknown");
+            user.setLastName(userChat.getLastName() != null ? userChat.getLastName() : "Unknown");
             sessionState.put(message.getChatId(), user);
-            recordInfo(Paths.get(URL_TO_DB), sessionState);
+            //Recording new user to Json
+            recordInfo(Paths.get(URL_TO_DB));//OK
+
             System.out.println("Создался новый user, id=" + message.getChatId());
-        }else {
+        } else {
             user = sessionState.get(message.getChatId());
             System.out.println("User from data base activated, id=" + user.getUserChatId());
         }
         String mesTxt = message.getText().trim();
-        if (mesTxt.equals("<HOME>")){
-            user.getCurrentSession().setSessionOpened(false);
-            sendMessage(message, "Choose operation");
+        if (mesTxt.equals("<HOME>")) {
+//            user.getCurrentSession().setSessionOpened(false);
+            user.getCurrentSession().terminateAllProcesses();
+            sendMessage(message, "Choose operation or lets talk!");
+            recordInfo(Paths.get(URL_TO_DB));
+            System.out.println("Сессия открыта " + user.getCurrentSession().isSessionOpened());
         }
         if (user.getCurrentSession() == null || !user.getCurrentSession().isSessionOpened()) {
             if (mesTxt.equalsIgnoreCase("/start")) {
                 startBot(message);
                 System.out.println(Phrases.SENDED_FROM_USER + "\n<" + message.getText() + '>');
+                System.out.println("Сессия открыта " + user.getCurrentSession().isSessionOpened());
             }
             if (mesTxt.equalsIgnoreCase("ok")) {
-                sendMessage(message, "Choose operation");
+                sendMessage(message, "Choose operation or lets talk!");
+                System.out.println("Сессия открыта " + user.getCurrentSession().isSessionOpened());
             }
             if (mesTxt.equalsIgnoreCase("weather now")) {
                 user.setCurrentSession(new WeatherSession());
                 sendMessage(message, user.getCurrentSession().nextStep(message.getText()));
-                recordInfo(Paths.get(URL_TO_DB), sessionState);
+                recordInfo(Paths.get(URL_TO_DB));
                 System.out.println("Сессия открыта=" + user.getCurrentSession().isSessionOpened() + ", " + user);
+            }
+            if(mesTxt.equalsIgnoreCase("lets talk")){
+                user.setCurrentSession(new TalkingSession());
+                sendMessage(message, user.getCurrentSession().nextStep(message.getText()));
+                recordInfo(Paths.get(URL_TO_DB));
             }
             if (mesTxt.toLowerCase().startsWith("ты")) {
                 String[] ar = mesTxt.split(" ");
                 sendMessage(message, ar.length > 1 ? "Сам ты " + ar[1].toLowerCase() : "Не понял прикола");
             }
-        }else{
+        } else {
             sendMessage(message, user.getCurrentSession().nextStep(message.getText()));
-            recordInfo(Paths.get(URL_TO_DB), sessionState);
+            recordInfo(Paths.get(URL_TO_DB));
             System.out.println("Сессия открыта " + user.getCurrentSession().isSessionOpened());
         }
     }
@@ -133,7 +148,7 @@ public class BotBotBot extends TelegramLongPollingBot {
         sMObj.setChatId(msg.getChatId());
         sMObj.setText(text);
 
-        System.out.println(Phrases.SENDED_FROM_BOT + "\n" + '<' +text + '>');
+        System.out.println(Phrases.SENDED_FROM_BOT + "\n" + '<' + text + '>');
 
         setKeyBoard(sMObj);
         try {
@@ -143,8 +158,9 @@ public class BotBotBot extends TelegramLongPollingBot {
         }
     }
 
-    private static Map<Long, User> uploadInfo(Path path){
-        Type mapType = new TypeToken<HashMap<Long, User>>(){}.getType();
+    private static Map<Long, User> uploadInfo(Path path) {
+        Type mapType = new TypeToken<HashMap<Long, User>>() {
+        }.getType();
         Map<Long, User> usersDb = Collections.emptyMap();
         try {
             usersDb = jsonSessionDeserializer.fromJson(new FileReader(path.toString()), mapType);
@@ -153,9 +169,10 @@ public class BotBotBot extends TelegramLongPollingBot {
         }
         return usersDb;
     }
-    private static void recordInfo(Path path, Map<Long, User> map){
+
+    private static void recordInfo(Path path) {
         try (FileWriter writer = new FileWriter(path.toFile())) {
-            writer.write(jsonSessionDeserializer.toJson(map));
+            writer.write(jsonSessionDeserializer.toJson(sessionState));
         } catch (IOException e) {
             e.printStackTrace();
         }

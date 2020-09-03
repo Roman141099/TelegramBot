@@ -1,14 +1,16 @@
 package Main.UBot.com;
 
 public class WeatherParser {
-    private String country;
-    private String name;
-    private Coordinates coord;
+    private final String country;
+    private final String name;
+    private final String description;
+    private final String degrees;
 
-    public WeatherParser(String country, String name, Coordinates coord) {
+    public WeatherParser(String country, String name, String description, String degrees) {
         this.country = country;
         this.name = name;
-        this.coord = coord;
+        this.description = description;
+        this.degrees = degrees;
     }
 
     static class Coordinates{
@@ -27,8 +29,9 @@ public class WeatherParser {
                     ", latitude : " + lat;
         }
     }
+
     @Override
     public String toString() {
-        return "Country : " + country + "\nPlace : " + name + "\n" + coord;
+        return String.format("Now weather state :\n%s\n%s\n%s\n%s", description, degrees, name, country);
     }
 }
