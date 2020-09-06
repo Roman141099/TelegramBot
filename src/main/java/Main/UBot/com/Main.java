@@ -14,6 +14,5 @@ public class Main {
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }
-
     }
 }

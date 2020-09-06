@@ -1,4 +1,14 @@
 {
+  "914949400": {
+    "User firstname": "Павел",
+    "User lastname": "Макеев",
+    "User ID": 914949400,
+    "Session settings": {
+      "isChoosedCity": true,
+      "sessionOpened": true,
+      "Session type endpoint": "Main.UBot.com.WeatherSession"
+    }
+  },
   "1082560005": {
     "User firstname": "Roman",
     "User lastname": "Unknown",

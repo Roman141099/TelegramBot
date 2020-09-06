@@ -1,5 +1,7 @@
 package Main.UBot.com;
 
+import org.telegram.telegrambots.meta.api.objects.Message;
+
 public abstract class Session {
 
     protected boolean sessionOpened;
@@ -21,7 +23,7 @@ public abstract class Session {
     }
 
     //The next step in all sessions
-    public abstract String nextStep(String inputTxt);
+    public abstract String nextStep(String inputTxt, Message message);
 
     public abstract void terminateAllProcesses();
 
