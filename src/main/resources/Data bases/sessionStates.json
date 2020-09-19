@@ -1,13 +1,14 @@
 {
-  "914949400": {
-    "User firstname": "Павел",
-    "User lastname": "Макеев",
-    "User ID": 914949400,
+  "482985192": {
+    "User firstname": "Даниил",
+    "User lastname": "Парков",
+    "User ID": 482985192,
     "Session settings": {
-      "isChoosedCity": true,
+      "saidHello": true,
       "sessionOpened": true,
-      "Session type endpoint": "Main.UBot.com.WeatherSession"
-    }
+      "Session type endpoint": "Main.UBot.com.CityChoosingSession"
+    },
+    "Priority cities list": []
   },
   "1082560005": {
     "User firstname": "Roman",
@@ -15,8 +16,31 @@
     "User ID": 1082560005,
     "Session settings": {
       "isChoosedCity": false,
+      "resultRecieved": false,
       "sessionOpened": false,
-      "Session type endpoint": "Main.UBot.com.WeatherSession"
-    }
+      "Session type endpoint": "Main.UBot.com.DailyForecastSession"
+    },
+    "Priority cities list": [
+      "Самара",
+      "Вашингтон"
+    ],
+    "Last searched city": "проспект Удачи"
+  },
+  "531543299": {
+    "User firstname": "Katerina",
+    "User lastname": "Unknown",
+    "User ID": 531543299,
+    "Session settings": {
+      "inMainMenu": true,
+      "isRequestedCityEdit": false,
+      "isReadyForEditCity": false,
+      "isReadyToDelete": false,
+      "sessionOpened": false,
+      "Session type endpoint": "Main.UBot.com.SettingsSession"
+    },
+    "Priority cities list": [
+      "Самара"
+    ],
+    "Last searched city": "Самара"
   }
 }

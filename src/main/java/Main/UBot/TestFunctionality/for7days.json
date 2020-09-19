@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": 50.15,
+    "lat": 53.2
+  },
+  "weather": [
+    {
+      "id": 802,
+      "main": "Clouds",
+      "description": "переменная облачность",
+      "icon": "03n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 11,
+    "feels_like": 5.17,
+    "temp_min": 11,
+    "temp_max": 11,
+    "pressure": 1014,
+    "humidity": 71
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 7,
+    "deg": 310
+  },
+  "clouds": {
+    "all": 40
+  },
+  "dt": 1600282469,
+  "sys": {
+    "type": 1,
+    "id": 9051,
+    "country": "RU",
+    "sunrise": 1600222515,
+    "sunset": 1600268001
+  },
+  "timezone": 14400,
+  "id": 499099,
+  "name": "Самара",
+  "cod": 200
+}

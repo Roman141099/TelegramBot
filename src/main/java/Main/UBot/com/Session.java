@@ -1,6 +1,9 @@
 package Main.UBot.com;
 
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+
+import java.util.function.BiConsumer;
 
 public abstract class Session {
 
@@ -23,7 +26,9 @@ public abstract class Session {
     }
 
     //The next step in all sessions
-    public abstract String nextStep(String inputTxt, Message message);
+    public abstract String nextStep(String inputTxt, Message message, User user);
+
+    public abstract BiConsumer<SendMessage, User> getButtonsMarkUp();
 
     public abstract void terminateAllProcesses();
 

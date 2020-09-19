@@ -6,6 +6,6 @@ public class NotFoundForecastException extends RuntimeException{
     }
 
     public NotFoundForecastException() {
-        super("Weather parser object can not be null");
+        super("Weather object can not be null");
     }
 }
