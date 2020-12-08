@@ -1,3 +1,4 @@
 # Project exclude paths
 /target/
 /src/main/java/Main/telegram_bot/TestFunctionality/
+/out/
