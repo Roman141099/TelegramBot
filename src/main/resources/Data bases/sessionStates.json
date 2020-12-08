@@ -1,15 +1,4 @@
 {
-  "482985192": {
-    "User firstname": "Даниил",
-    "User lastname": "Парков",
-    "User ID": 482985192,
-    "Session settings": {
-      "saidHello": true,
-      "sessionOpened": true,
-      "Session type endpoint": "Main.UBot.com.CityChoosingSession"
-    },
-    "Priority cities list": []
-  },
   "1082560005": {
     "User firstname": "Roman",
     "User lastname": "Unknown",
@@ -18,29 +7,35 @@
       "isChoosedCity": false,
       "resultRecieved": false,
       "sessionOpened": false,
-      "Session type endpoint": "Main.UBot.com.DailyForecastSession"
+      "Session type endpoint": "Main.telegram_bot.design.sessions.DailyForecastSession"
     },
     "Priority cities list": [
-      "Самара",
-      "Вашингтон"
+      {
+        "position": {
+          "lat": 53.198627,
+          "lon": 50.113987
+        },
+        "title": "Самара",
+        "description": "Россия",
+        "display_name": "Россия, Самара"
+      }
     ],
-    "Last searched city": "проспект Удачи"
+    "Last searched city": {
+      "position": {
+        "lat": 53.198627,
+        "lon": 50.113987
+      },
+      "title": "Самара",
+      "description": "Россия",
+      "display_name": "Россия, Самара"
+    },
+    "Show map of city": true
   },
-  "531543299": {
-    "User firstname": "Katerina",
+  "545651838": {
+    "User firstname": "Настя",
     "User lastname": "Unknown",
-    "User ID": 531543299,
-    "Session settings": {
-      "inMainMenu": true,
-      "isRequestedCityEdit": false,
-      "isReadyForEditCity": false,
-      "isReadyToDelete": false,
-      "sessionOpened": false,
-      "Session type endpoint": "Main.UBot.com.SettingsSession"
-    },
-    "Priority cities list": [
-      "Самара"
-    ],
-    "Last searched city": "Самара"
+    "User ID": 545651838,
+    "Priority cities list": [],
+    "Show map of city": true
   }
 }

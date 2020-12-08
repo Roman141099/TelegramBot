@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="3000">
+
+    <property file="src/main/resources/logProperties.properties"/>
+
+    <appender name="ErrAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPack}/errors/current.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${erFileName}</fileNamePattern>
+            <maxHistory>20</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+            <maxFileSize>100MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${erPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="InfoFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${infFileName}</fileNamePattern>
+            <maxHistory>20</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+            <maxFileSize>150MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${infPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${infPattern}</pattern>
+        </encoder>
+        <target>System.err</target>
+    </appender>
+
+    <logger name="Main.telegram_bot.design" level="ERROR" additivity="false">
+        <appender-ref ref="ErrAppender"/>
+    </logger>
+
+    <logger name="Main.telegram_bot.design" level="INFO">
+        <appender-ref ref="InfoFileAppender"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>

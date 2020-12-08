@@ -1,0 +1,32 @@
+{
+  "Orin": {
+    "Dwarf age": 90,
+    "Dwarf lunch": "Ale with chicken",
+    "Facial hair": "black beard and mustache",
+    "Weapons": [
+      {
+        "type": "sword",
+        "name": "Slasher from Gondolin"
+      },
+      {
+        "type": "shield",
+        "name": "Oaken Shield from Moria"
+      },
+      "dagger"
+    ]
+  },
+  "Kori": {
+    "Dwarf age": 60,
+    "Facial hair": "red mustache",
+    "Weapons": [
+      "mace",
+      "bow"
+    ]
+  },
+  "Billy Bob": {
+    "Dwarf age": 45,
+    "Dwarf lunch": "Ale with chicken and potatoes, tea with some cakes",
+    "Facial hair": "Is he really a dwarf?",
+    "Weapons": "No weapons"
+  }
+}
