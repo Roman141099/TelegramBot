@@ -4,10 +4,32 @@
     "User lastname": "Unknown",
     "User ID": 1082560005,
     "Session settings": {
-      "isChoosedCity": false,
       "resultRecieved": false,
+      "isChoosedCity": false,
       "sessionOpened": false,
-      "Session type endpoint": "Main.telegram_bot.design.sessions.DailyForecastSession"
+      "Session type endpoint": "Main.telegram_bot.design.sessions.WeatherSession"
+    },
+    "Priority cities list": [],
+    "Last searched city": {
+      "position": {
+        "lat": 53.2110481262207,
+        "lon": 50.235347747802734
+      },
+      "title": "Советский район",
+      "description": "Россия, Самара",
+      "display_name": "Россия, Самара, Советский район"
+    },
+    "Show map of city": true
+  },
+  "451187728": {
+    "User firstname": "SaiD",
+    "User lastname": "HazzarD",
+    "User ID": 451187728,
+    "Session settings": {
+      "resultRecieved": false,
+      "isChoosedCity": false,
+      "sessionOpened": false,
+      "Session type endpoint": "Main.telegram_bot.design.sessions.WeatherSession"
     },
     "Priority cities list": [
       {

@@ -15,7 +15,7 @@ Session doesn't works!
  */
 public class TalkingSession extends Session {
     private boolean defMessageSent;
-    private transient final List<String> buttons = new ArrayList<>(Arrays.asList("|HOME|", "Ты сука"));
+    private transient final List<String> buttons = new ArrayList<>(Arrays.asList("|HOME|"));
     private transient final BiConsumer<SendMessage, User> buttonsMarkUp = this::setButtons;
     @Override
     public String nextStep(String inputTxt, Message message, User user) {
